@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-control">
                     <div class="range-input">
-                        <label for="spread">Intensidade do espalhamento (Spread)</label>
+                        <label for="spread">Intensidade do espalhamento (Spread):</label>
                         <input type="range" id="spread" name="spread" min="-100" max="100" value="3">
                     </div>
                     <div class="reference-input">
@@ -53,6 +53,34 @@
                         <p>px</p>
                     </div>
                 </div>
+                <!-- Cor da Sombra -->
+                <div class="form-control">
+                    <div class="range-input">
+                        <label for="cores">Cor da sombra:</label>
+                        <input type="color" id="cores" name="ArcoIris" list="arcoIris" value="#000000">
+                    </div>
+                    <div class="reference-input">
+                        <input type="text" id="color-value" name="color-value">
+                    </div>
+                </div>
+                <!-- ----------------------------------------------------------- -->
+                <div class="form-control">
+                    <div class="range-input">
+                        <label for="opacidade">Opacidade:</label>
+                        <input type="range" id="opacidade" name="opacidade" min="0" max="100" value="100">
+                    </div>
+                    <div class="reference-input">
+                        <input type="text" id="opacidade-value" name="opacidade-value">
+                    </div>
+                </div>
+                <!-- ----------------------------------------------------------- -->
+                <div class="form-control">
+                    <div class="range-input">
+                        <label for="insetBox">Sombra interna? (Insert)</label>
+                        <input type="checkbox" id="insetBox" name="insetBox">
+                    </div>
+                </div>
+                <!-- ----------------------------------------------------------- -->
             </div>
             <div id="preview">
                 <h2>Preview do efeito gerado:</h2>

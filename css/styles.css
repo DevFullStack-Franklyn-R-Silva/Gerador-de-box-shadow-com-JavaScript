@@ -71,6 +71,7 @@ h2 {
 
 .reference-input p {
     margin-left: 4px;
+    font-weight: bold;
 }
 
 .form-control input[type="text"] {
@@ -78,6 +79,7 @@ h2 {
     width: 30px;
     margin-left: 1rem;
     text-align: center;
+    font-weight: bold;
 }
 
 /* Preview */
@@ -103,3 +105,15 @@ h2 {
     border: 2px solid #e9d60a;
     padding: 1rem;
 }
+
+.form-control input[id="color-value"] {
+    height: 35px;
+    width: 150px;
+    margin-left: 1rem;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+

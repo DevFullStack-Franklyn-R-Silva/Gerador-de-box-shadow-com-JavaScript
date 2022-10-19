@@ -11,7 +11,12 @@ class BoxShadowGenerator {
         previewBox,
         rule,
         webkitRule,
-        mozRule
+        mozRule,
+        cores,
+        coresRef,
+        opacidade,
+        opacidadeRef,
+        insetBox
     ) {
         this.horizontal = horizontal;
         this.horizontalRef = horizontalRef;
@@ -25,6 +30,11 @@ class BoxShadowGenerator {
         this.rule = rule;
         this.webkitRule = webkitRule;
         this.mozRule = mozRule;
+        this.cores = cores;
+        this.coresRef = coresRef;
+        this.opacidade = opacidade;
+        this.opacidadeRef = opacidadeRef;
+        this.insetBox = insetBox;
     }
 
     initialize() {
@@ -32,13 +42,25 @@ class BoxShadowGenerator {
         this.verticalRef.value = this.vertical.value;
         this.spreadRef.value = this.spread.value;
         this.blurRef.value = this.blur.value;
+        this.coresRef.value = this.cores.value;
+        this.opacidadeRef.value = this.opacidade.value;
+        this.insetBox.value;
 
         this.applyRule();
         this.showRule();
     }
 
     applyRule() {
-        this.previewBox.style.boxShadow = `${this.horizontalRef.value}px ${this.verticalRef.value}px ${this.blurRef.value}px ${this.spreadRef.value}px #000000`;
+        let boxAtivo = "";
+        if (this.insetBox.checked) {
+            boxAtivo = "inset";
+        }
+        this.previewBox.style.boxShadow = `${this.horizontalRef.value}px ${
+            this.verticalRef.value
+        }px ${this.blurRef.value}px ${this.spreadRef.value}px ${this.hex2rgba(
+            this.coresRef.value,
+            this.opacidadeRef.value
+        )} ${boxAtivo}`;
         this.currentRule = this.previewBox.style.boxShadow;
     }
 
@@ -62,10 +84,24 @@ class BoxShadowGenerator {
             case "spread":
                 this.spreadRef.value = value;
                 break;
+            case "cores":
+                this.coresRef.value = value;
+                break;
+            case "opacidade":
+                this.opacidadeRef.value = value / 100;
+                break;
+            case "insetBox":
+                this.insetBox.value = value;
+                break;
         }
         this.applyRule();
         this.showRule();
     }
+    //converte rgb ou hex para rgba
+    hex2rgba = (hex, alpha = 1) => {
+        const [r, g, b] = hex.match(/\w\w/g).map((x) => parseInt(x, 16));
+        return `rgba(${r},${g},${b},${alpha})`;
+    };
 }
 
 // Selecao de elementos
@@ -84,6 +120,14 @@ const rule = document.querySelector("#rule span");
 const webkitRule = document.querySelector("#webkit-rule span");
 const mozRule = document.querySelector("#moz-rule span");
 
+const cores = document.querySelector("#cores");
+const coresRef = document.querySelector("#color-value");
+
+const opacidade = document.querySelector("#opacidade");
+const opacidadeRef = document.querySelector("#opacidade-value");
+
+const insetBox = document.querySelector("#insetBox");
+
 const boxShadow = new BoxShadowGenerator(
     horizontal,
     horizontalRef,
@@ -96,7 +140,12 @@ const boxShadow = new BoxShadowGenerator(
     previewBox,
     rule,
     webkitRule,
-    mozRule
+    mozRule,
+    cores,
+    coresRef,
+    opacidade,
+    opacidadeRef,
+    insetBox
 );
 boxShadow.initialize();
 
@@ -123,4 +172,22 @@ spread.addEventListener("input", (e) => {
     const value = e.target.value;
 
     boxShadow.updateValue("spread", value);
+});
+
+cores.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updateValue("cores", value);
+});
+
+opacidade.addEventListener("input", (e) => {
+    const value = e.target.value;
+    
+    boxShadow.updateValue("opacidade", value);
+});
+
+insetBox.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updateValue("insetBox", value);
 });
