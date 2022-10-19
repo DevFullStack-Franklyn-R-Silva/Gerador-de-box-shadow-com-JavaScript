@@ -41,11 +41,31 @@ class BoxShadowGenerator {
         this.previewBox.style.boxShadow = `${this.horizontalRef.value}px ${this.verticalRef.value}px ${this.blurRef.value}px ${this.spreadRef.value}px #000000`;
         this.currentRule = this.previewBox.style.boxShadow;
     }
-    showRule() { 
-        this.rule.innerText = `${this.currentRule};`
-        this.webkitRule.innerText = `${this.currentRule};`
-        this.mozRule.innerText = `${this.currentRule};`
-    };
+
+    showRule() {
+        this.rule.innerText = this.currentRule;
+        this.webkitRule.innerText = this.currentRule;
+        this.mozRule.innerText = this.currentRule;
+    }
+
+    updateValue(type, value) {
+        switch (type) {
+            case "horizontal":
+                this.horizontalRef.value = value;
+                break;
+            case "vertical":
+                this.verticalRef.value = value;
+                break;
+            case "blur":
+                this.blurRef.value = value;
+                break;
+            case "spread":
+                this.spreadRef.value = value;
+                break;
+        }
+        this.applyRule();
+        this.showRule();
+    }
 }
 
 // Selecao de elementos
@@ -79,4 +99,28 @@ const boxShadow = new BoxShadowGenerator(
     mozRule
 );
 boxShadow.initialize();
+
 // Eventos
+horizontal.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updateValue("horizontal", value);
+});
+
+vertical.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updateValue("vertical", value);
+});
+
+blur.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updateValue("blur", value);
+});
+
+spread.addEventListener("input", (e) => {
+    const value = e.target.value;
+
+    boxShadow.updateValue("spread", value);
+});
