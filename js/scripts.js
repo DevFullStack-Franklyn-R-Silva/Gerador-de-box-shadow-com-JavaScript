@@ -220,7 +220,7 @@ let index = 0;
 botaoCopiar.addEventListener("click", function () {
     setTimeout(function () {
         document.querySelector("#texto").innerHTML =
-            "Clique no quadro acima para copiar as regras";
+            "Clique aqui para copiar as regras";
     }, 3000);
     if (index + 1 == listaDeTexto.length) {
         index = 0;
