@@ -149,7 +149,6 @@ const insetBox = document.querySelector("#insetBox");
 const botaoCopiar = document.querySelector("#copiarTexto");
 const textoTela = document.querySelector("#texto");
 
-
 const boxShadow = new BoxShadowGenerator(
     horizontal,
     horizontalRef,
