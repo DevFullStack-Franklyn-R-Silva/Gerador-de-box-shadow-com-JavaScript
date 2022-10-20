@@ -60,7 +60,7 @@ h2 {
     appearance: none;
     width: 25px;
     height: 25px;
-    background-color: #e9d60a;
+    background-color: #005cc8;
     cursor: pointer;
 }
 
@@ -80,6 +80,41 @@ h2 {
     margin-left: 1rem;
     text-align: center;
     font-weight: bold;
+}
+
+.form-control input[id="color-value"] {
+    height: 35px;
+    width: 150px;
+    margin-left: 1rem;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-control input[id="opacidade-value"] {
+    height: 30px;
+    width: 100px;
+    margin-left: 1rem;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-control input[id="insetBox"] {
+    height: 30px;
+    width: 100px;
+    margin-left: 1rem;
+
+}
+
+.copiarTexto {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-style: italic;
+    font-size: 16px;
+    width: 500px;
+    height: 50px;
 }
 
 /* Preview */
@@ -102,18 +137,7 @@ h2 {
     background-color: #d3d3d3;
     max-width: 1000px;
     margin: 0 auto;
-    border: 2px solid #e9d60a;
+    border: 2px solid #005cc8;
     padding: 1rem;
+    
 }
-
-.form-control input[id="color-value"] {
-    height: 35px;
-    width: 150px;
-    margin-left: 1rem;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-
-

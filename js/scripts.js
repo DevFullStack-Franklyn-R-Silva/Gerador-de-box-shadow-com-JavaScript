@@ -16,7 +16,9 @@ class BoxShadowGenerator {
         coresRef,
         opacidade,
         opacidadeRef,
-        insetBox
+        insetBox,
+        botaoCopiar,
+        texto
     ) {
         this.horizontal = horizontal;
         this.horizontalRef = horizontalRef;
@@ -35,6 +37,7 @@ class BoxShadowGenerator {
         this.opacidade = opacidade;
         this.opacidadeRef = opacidadeRef;
         this.insetBox = insetBox;
+        this.botaoCopiar = botaoCopiar;
     }
 
     initialize() {
@@ -43,8 +46,9 @@ class BoxShadowGenerator {
         this.spreadRef.value = this.spread.value;
         this.blurRef.value = this.blur.value;
         this.coresRef.value = this.cores.value;
-        this.opacidadeRef.value = this.opacidade.value;
+        this.opacidadeRef.value = 1;
         this.insetBox.value;
+        this.botaoCopiar.value;
 
         this.applyRule();
         this.showRule();
@@ -68,6 +72,16 @@ class BoxShadowGenerator {
         this.rule.innerText = this.currentRule;
         this.webkitRule.innerText = this.currentRule;
         this.mozRule.innerText = this.currentRule;
+
+        let textoString = JSON.stringify(
+            `box-shadow: ${this.rule.innerText}; -webkit-box-shadow: ${this.webkitRule.innerText}; -moz-box-shadow: ${this.mozRule.innerText};`
+        );
+
+        botaoCopiar.addEventListener("click", function (e) {
+            const tirarAspas = textoString.replace(/"/g, "");
+            navigator.clipboard.writeText(tirarAspas);
+            document.execCommand("copy");
+        });
     }
 
     updateValue(type, value) {
@@ -93,7 +107,11 @@ class BoxShadowGenerator {
             case "insetBox":
                 this.insetBox.value = value;
                 break;
+            case "botaoCopiar":
+                this.botaoCopiar.value = value;
+                break;
         }
+
         this.applyRule();
         this.showRule();
     }
@@ -128,6 +146,10 @@ const opacidadeRef = document.querySelector("#opacidade-value");
 
 const insetBox = document.querySelector("#insetBox");
 
+const botaoCopiar = document.querySelector("#copiarTexto");
+const textoTela = document.querySelector("#texto");
+
+
 const boxShadow = new BoxShadowGenerator(
     horizontal,
     horizontalRef,
@@ -145,7 +167,8 @@ const boxShadow = new BoxShadowGenerator(
     coresRef,
     opacidade,
     opacidadeRef,
-    insetBox
+    insetBox,
+    botaoCopiar
 );
 boxShadow.initialize();
 
@@ -182,7 +205,7 @@ cores.addEventListener("input", (e) => {
 
 opacidade.addEventListener("input", (e) => {
     const value = e.target.value;
-    
+
     boxShadow.updateValue("opacidade", value);
 });
 
@@ -190,4 +213,21 @@ insetBox.addEventListener("input", (e) => {
     const value = e.target.value;
 
     boxShadow.updateValue("insetBox", value);
+});
+
+const listaDeTexto = ["Copiado com sucesso!"];
+let index = 0;
+
+botaoCopiar.addEventListener("click", function () {
+    setTimeout(function () {
+        document.querySelector("#texto").innerHTML =
+            "Clique no quadro acima para copiar as regras";
+    }, 3000);
+    if (index + 1 == listaDeTexto.length) {
+        index = 0;
+    } else {
+        index = index + 1;
+    }
+
+    textoTela.textContent = listaDeTexto[index];
 });
